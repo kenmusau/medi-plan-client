@@ -1,9 +1,11 @@
 import React from "react";
 import "./home.css";
 import { Link } from "react-router-dom";
-// import doctor from "../../assets/doctor.jpg";
-// import onlineDoctor from "../../assets/OnlineDoctor.gif";
 import homeDoctor from "../../assets/homeDoctor.png";
+import ourDoctor from "../../assets/ourDoctor.jpg";
+import sickOne from "../../assets/sickOne.webp";
+import sickTwo from "../../assets/sickTwo.webp";
+import sickThree from "../../assets/sickThree.webp";
 
 function Home() {
   return (
@@ -116,6 +118,112 @@ function Home() {
           </p>
         </div>
       </section>
+
+      <section className="feature_doctor">
+        <img src={ourDoctor} alt="Our Doctor" />
+        <div className="our_doctor_details">
+          <h1 className="feature_doctor_title">Our Doctor</h1>
+          <h2 className="doctor_name">Doctor Justus Kamau</h2>
+          <h3 className="doctor_title">Psychiatry</h3>
+          <p className="doctor_description">
+            Dr Justus Kamau is a mental Health Specialist with almost a decade
+            experience, he is pracitcing at MedicHospital, The medical services
+            provided are consultation regarding mental Health
+          </p>
+          <button className="btn_call_doctor">Contact Now</button>
+        </div>
+      </section>
+      <article className="post_heading">
+        <div className="post_heading_content">
+          <h1 className="post_heading_title">Article and News.</h1>
+          <p className="post_heading_text">
+            Find the latest information and daily news from trusted sources.
+          </p>
+        </div>
+      </article>
+
+      <section className=" article_news_section">
+        <div className="features article_news">
+          <img src={sickOne} alt="" />
+          <h2 className="features_title">
+            Know How Antibodies Work Against Viruses
+          </h2>
+          <p className="features_text">
+            Antibodies are essential components of our immune system's defense
+            against viruses. When a virus enters the body, it triggers an immune
+            response. Once bound, antibodies can...
+          </p>
+        </div>
+
+        <div className="features article_news">
+          <img src={sickTwo} alt="" />
+          <h2 className="features_title">
+            Know How Antibodies Work Against Viruses
+          </h2>
+          <p className="features_text">
+            Antibodies are essential components of our immune system's defense
+            against viruses. When a virus enters the body, it triggers an immune
+            response. Once bound, antibodies can...
+          </p>
+        </div>
+
+        <div className="features article_news">
+          <img src={sickThree} alt="" />
+          <h2 className="features_title">
+            Know How Antibodies Work Against Viruses
+          </h2>
+          <p className="features_text">
+            Antibodies are essential components of our immune system's defense
+            against viruses. When a virus enters the body, it triggers an immune
+            response. Once bound, antibodies can...
+          </p>
+        </div>
+      </section>
+
+      <article className="post_heading">
+        <div className="post_heading_content">
+          <button className="post_heading_btn">Load More</button>
+        </div>
+      </article>
+
+      <footer>
+        <div className="hospital_details">
+          <p className="logo">
+            <span className="logo_init">𝘔𝘦𝘥𝘪𝘤</span>
+            <span className="logo_end">✙</span>
+          </p>
+          <p>
+            We are ready to hear anything, because serving your health neads our
+            priority
+          </p>
+        </div>
+        <div className="hospital_menu">
+          <div>
+            <h2>Menu</h2>
+            <ul>
+              <li>Home</li>
+              <li>Doctors</li>
+              <li>News</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Services</h2>
+            <ul>
+              <li>Check Up</li>
+              <li>Consultation</li>
+              <li>Buy Medicine</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Further Information</h2>
+            <ul>
+              <li>Terms & Conditions</li>
+              <li>Privacy Policy</li>
+            </ul>
+          </div>
+        </div>
+        <div>Medic✙ 2023. ALl Rights Reserved &copy;</div>
+      </footer>
     </div>
   );
 }
