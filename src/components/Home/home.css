@@ -64,6 +64,7 @@ body {
   color: #343a40;
   font-size: 16px;
   display: inline-block;
+  font-weight: 600;
 }
 
 .home_nav a:link:last-child {
@@ -304,13 +305,14 @@ footer{
     border-radius: 12px;
 }
 
-footer div:last-child{
+footer .copyright_policy{
     grid-column: 1 / -1;
     /* margin-bottom: 20px; */
     /* background-color: #c3fae8; */
     padding-bottom: 0;
     text-align: center;
     font-style: italic;
+    color: #868e96;
 }
 
 

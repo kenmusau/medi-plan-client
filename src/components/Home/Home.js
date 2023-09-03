@@ -222,7 +222,9 @@ function Home() {
             </ul>
           </div>
         </div>
-        <div>Medic✙ 2023. ALl Rights Reserved &copy;</div>
+        <div className="copyright_policy">
+          Medic✙ 2023. ALl Rights Reserved &copy;
+        </div>
       </footer>
     </div>
   );
