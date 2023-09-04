@@ -13,7 +13,7 @@ function SignUpForm() {
   } = useForm();
 
   function onSubmit(data) {
-    console.log("Form Submit", data.username);
+    console.log("Form Submit", data.dob);
   }
 
   return (
@@ -35,19 +35,38 @@ function SignUpForm() {
             },
           })}
         />
+        <p className="error">{errors.username?.message}</p>
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          {...register("email", {
+            required: {
+              value: true,
+              message: "Username is required",
+            },
+            pattern: {
+              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              message: "Enter correct Email format",
+            },
+          })}
+        />
+        <p className="error">{errors.email?.message}</p>
 
         <label htmlFor="dob">Date of Birth</label>
         <input
           type="date"
           id="dob"
           {...register("dob", {
+            valueAsDate: true,
             required: {
               value: true,
               message: "Your date of birth is required",
             },
           })}
         />
-
+        <p className="error">{errors.dob?.message}</p>
         <label htmlFor="gender">Gender</label>
         <select id="gender" {...register("gender")}>
           <option value="male">Male</option>
@@ -59,7 +78,7 @@ function SignUpForm() {
           type="password"
           id="password"
           {...register("password", {
-            required: { value: true, message: "Your password is required" },
+            required: { value: true, message: "password is required" },
             pattern: {
               value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
               message:
@@ -67,7 +86,7 @@ function SignUpForm() {
             },
           })}
         />
-
+        <p className="error">{errors.password?.message}</p>
         <button className="hook_form_btn">Submit</button>
       </form>
       <DevTool control={control} />

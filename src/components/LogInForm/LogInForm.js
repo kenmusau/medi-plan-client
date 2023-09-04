@@ -1,9 +1,12 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 function LogInForm() {
   return (
     <div>
-      <h1> LOGIN</h1>
+      <form>
+        <label htmlFor=""></label>
+      </form>
     </div>
   );
 }
