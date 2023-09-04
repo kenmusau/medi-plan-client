@@ -18,13 +18,15 @@ function Home() {
         <nav className="home_nav">
           <a href="#featured">Featured</a>
           <a href="#services">Services</a>
-          <a href="#doctor">Doctor</a>
-          <a className="login" href="#login">
+          <Link to="/doctorLogin" href="#doctor">
+            Doctor
+          </Link>
+          <Link to="/login" className="login">
             Login
-          </a>
-          <a className="register" href="#register">
+          </Link>
+          <Link to="/register" className="register">
             Register
-          </a>
+          </Link>
         </nav>
       </header>
       <section className="hero">
@@ -37,7 +39,9 @@ function Home() {
             There is nothing more important than our good health, because that's
             our principle asset for our good future.
           </p>
-          <Link className="hero_heading_button">Make Appointment</Link>
+          <Link to="/login" className="hero_heading_button">
+            Make Appointment
+          </Link>
         </div>
       </section>
       <article className="post_heading">
