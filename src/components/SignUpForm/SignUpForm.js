@@ -22,7 +22,7 @@ function SignUpForm() {
         <span className="logo_init">𝘔𝘦𝘥𝘪𝘤</span>
         <span className="logo_end">✙</span>
       </Link>
-      <h2 className="hook_form_header">Enter your Details.</h2>
+      <h2 className="hook_form_header">Enter your Details to register.</h2>
       <form className="sign_up_form" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="username">Username</label>
         <input
