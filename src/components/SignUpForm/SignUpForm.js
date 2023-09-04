@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import "./signUpForm.css";
 import { Link } from "react-router-dom";
 
 function SignUpForm() {
+  const [error, setError] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     control,
@@ -13,7 +16,29 @@ function SignUpForm() {
   } = useForm();
 
   function onSubmit(data) {
-    console.log("Form Submit", data.dob);
+    setError([]);
+    setIsLoading(true);
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        date_of_birth: data.dob,
+        gender: data.gender,
+      }),
+    }).then((r) => {
+      setIsLoading(false);
+      if (r.ok) {
+        // r.json().then((user) => onLogin(user));
+        r.json().then((user) => console.log(user));
+      } else {
+        r.json().then((err) => setError(err.errors));
+      }
+    });
   }
 
   return (
@@ -87,7 +112,14 @@ function SignUpForm() {
           })}
         />
         <p className="error">{errors.password?.message}</p>
-        <button className="hook_form_btn">Submit</button>
+
+        <button className="hook_form_btn" type="submit">
+          {isLoading ? "Loading..." : "Sign Up"}
+        </button>
+        <p>{error}</p>
+        {/* {error.map((err) => (
+          <Error key={err}>{err}</Error>
+        ))} */}
       </form>
       <DevTool control={control} />
     </div>

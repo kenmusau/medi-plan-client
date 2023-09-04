@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 function LogInForm() {
+  const [error, setError] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     control,
@@ -12,7 +14,25 @@ function LogInForm() {
   } = useForm();
 
   function onSubmit(data) {
-    console.log("Form Submit", data);
+    setIsLoading(true);
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.username,
+        password: data.password,
+      }),
+    }).then((r) => {
+      setIsLoading(false);
+      if (r.ok) {
+        // r.json().then((user) => onLogin(user));
+        r.json().then((user) => console.log(user));
+      } else {
+        r.json().then((err) => setError(err.errors));
+      }
+    });
   }
 
   return (
@@ -50,8 +70,11 @@ function LogInForm() {
           })}
         />
         <p className="error">{errors.password?.message}</p>
-        <button className="hook_form_btn">Submit</button>
+        <button className="hook_form_btn" type="submit">
+          {isLoading ? "Loading..." : "Login"}
+        </button>
       </form>
+      <p>{error}</p>
       <DevTool control={control} />
     </div>
   );
