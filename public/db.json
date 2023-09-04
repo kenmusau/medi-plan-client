@@ -1,0 +1,78 @@
+{
+    "doctors": [
+      {
+        "id": 1,
+        "username": "dr_john",
+        "password": "password123",
+        "name": "Dr. John Smith",
+        "email": "john.smith@example.com",
+        "title": "Psychiatrist"
+      }
+    ],
+    "patients": [
+      {
+        "id": 1,
+        "email": "patient1@example.com",
+        "username": "patient1",
+        "password": "patient123",
+        "dob": "1990-05-15",
+        "gender": "Male"
+      },
+      {
+        "id": 2,
+        "email": "patient2@example.com",
+        "username": "patient2",
+        "password": "patient456",
+        "dob": "1985-12-10",
+        "gender": "Female"
+      }
+    ],
+    "appointments": [
+      {
+        "id": 1,
+        "date": "2023-09-15",
+        "time": "10:00 AM",
+        "description": "Checkup",
+        "userId": 1,
+        "patientId": 1,
+        "doctorId": 1
+      },
+      {
+        "id": 2,
+        "date": "2023-09-16",
+        "time": "2:30 PM",
+        "description": "Follow-up",
+        "userId": 2,
+        "patientId": 2,
+        "doctorId": 1
+      },
+      {
+        "id": 3,
+        "date": "2023-09-17",
+        "time": "9:15 AM",
+        "description": "Consultation",
+        "userId": 1,
+        "patientId": 1,
+        "doctorId": 1
+      },
+      {
+        "id": 4,
+        "date": "2023-09-18",
+        "time": "3:45 PM",
+        "description": "Checkup",
+        "userId": 2,
+        "patientId": 2,
+        "doctorId": 1
+      },
+      {
+        "id": 5,
+        "date": "2023-09-19",
+        "time": "11:30 AM",
+        "description": "Follow-up",
+        "userId": 1,
+        "patientId": 1,
+        "doctorId": 1
+      }
+    ]
+  }
+  
