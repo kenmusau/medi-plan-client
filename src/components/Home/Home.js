@@ -18,7 +18,9 @@ function Home() {
         <nav className="home_nav">
           <a href="#featured">Featured</a>
           <a href="#services">Services</a>
-          <a href="#doctor">Doctor</a>
+          <Link to="" href="#doctor">
+            Doctor
+          </Link>
           <Link to="/login" className="login">
             Login
           </Link>
