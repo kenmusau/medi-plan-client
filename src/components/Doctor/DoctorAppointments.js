@@ -18,7 +18,7 @@ function DoctorAppointments() {
       <ul>
         {appointments.map((appointment) => (
           <li key={appointment.id}>
-            <h2>Appointment ID: {appointment.id}</h2>
+            <h2>Patient: {appointment.patient.name}</h2>
             <p>Date: {appointment.date}</p>
             <p>Time: {appointment.time}</p>
             <p>Description: {appointment.description}</p>
