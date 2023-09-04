@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Healthcare Appointment Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
 
-## Available Scripts
+The Healthcare Appointment Management System project aims to create an efficient and user-friendly platform for managing appointments between patients and doctors. This web application will be developed using Ruby on Rails for the backend and React for the frontend, providing a seamless experience for both patients and healthcare professionals.
 
-In the project directory, you can run:
+## Problem and Solution
 
-### `npm start`
+The current healthcare system faces challenges related to appointment management. Patients often struggle to schedule, track, and manage their appointments, while doctors find it challenging to organize their patient schedules effectively. Moreover, the lack of a digital platform hinders proper record-keeping and communication between patients and doctors.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Minimum Viable Product (MVP)**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Authentication and User Profiles
 
-### `npm test`
+- Registration for patients and doctors, including basic information (email, username, password).
+- Authentication for doctors' login.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Appointment Creation and Management
 
-### `npm run build`
+- Patients can create, view, and delete their appointments.
+- Doctors can create, view, and update appointments associated with their patients.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Dashboard and Landing Page
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- A simple landing page accessible to both doctors and patients.
+- A dashboard for doctors to efficiently manage their appointments.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Appointment Listing
 
-### `npm run eject`
+- Display a list of appointments for each user, with patients seeing their appointments and doctors seeing appointments associated with their patients.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### User Roles
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Implementation of two user roles: Patients and Doctors.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Backend-Backend Integration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Basic backend functionality for user authentication, appointment creation, and retrieval.
 
-## Learn More
+### Security
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Implementation of basic security measures to protect user data and authentication.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Frontend-Backend Integration
 
-### Code Splitting
+- Development of a basic frontend using React to enable user interaction with the system.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+By addressing these key features, we aim to create a healthcare appointment management system that enhances the patient-doctor experience and streamlines the appointment scheduling process.
