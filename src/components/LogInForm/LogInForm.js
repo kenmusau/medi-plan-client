@@ -15,7 +15,17 @@ function LogInForm() {
     console.log("Form Submit", data);
   }
 
-  return <div className="hook_form"></div>;
+  return (
+    <div className="hook_form">
+      <Link as={Link} to="/" className="logo">
+        <span className="logo_init">𝘔𝘦𝘥𝘪𝘤</span>
+        <span className="logo_end">✙</span>
+      </Link>
+      <h2 className="hook_form_header">Enter your Details to login.</h2>
+      <form className="sign_up_form" onSubmit={handleSubmit(onSubmit)}></form>
+      <DevTool control={control} />
+    </div>
+  );
 }
 
 export default LogInForm;
