@@ -4,7 +4,7 @@ import { DevTool } from "@hookform/devtools";
 import "./signUpForm.css";
 import { Link } from "react-router-dom";
 
-function SignUpForm() {
+function SignUpForm({ onLogin }) {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +33,7 @@ function SignUpForm() {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        // r.json().then((user) => onLogin(user));
+        r.json().then((user) => onLogin(user));
         r.json().then((user) => console.log(user));
       } else {
         r.json().then((err) => setError(err.errors));
