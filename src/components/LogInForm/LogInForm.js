@@ -73,6 +73,12 @@ function LogInForm({ onLogin }) {
         <button className="hook_form_btn" type="submit">
           {isLoading ? "Loading..." : "Login"}
         </button>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/register" className="redirect_button">
+            Sign Up
+          </Link>
+        </p>
       </form>
       <p>{error}</p>
       {/* {errors.map((err) => (

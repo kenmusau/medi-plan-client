@@ -85,3 +85,16 @@ select {
   font-size: 12px;
   text-align: left;
 }
+
+.redirect_button:link {
+  padding: 6px 20px;
+  background-color: #c3fae8;
+  border-radius: 100px;
+  margin-left: 10px;
+  color: white;
+}
+
+.redirect_button:hover {
+  background-color: #63e6be;
+  color: #e6fcf5;
+}

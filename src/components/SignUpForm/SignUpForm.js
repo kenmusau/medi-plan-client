@@ -116,6 +116,12 @@ function SignUpForm({ onLogin }) {
         <button className="hook_form_btn" type="submit">
           {isLoading ? "Loading..." : "Sign Up"}
         </button>
+        <p>
+          Already have an account?{" "}
+          <Link to="/login" className="redirect_button">
+            Log In
+          </Link>
+        </p>
         <p>{error}</p>
         {/* {error.map((err) => (
           <Error key={err}>{err}</Error>
