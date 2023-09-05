@@ -43,6 +43,24 @@ function PatientAppointments() {
         })
         .catch((error) => console.error("Error creating appointment:", error));
         };
+
+        const handleDeleteAppointment = (id) => {
+          fetch(`/API`, {
+            method: "DELETE",
+          })
+            .then((res) => {
+              if (res.status === 204) {
+                // Appointment successfully deleted
+                const updatedAppointments = appointments.filter(
+                  (appointment) => appointment.id !== id
+                );
+                setAppointments(updatedAppointments);
+              } else {
+                console.error("Error deleting appointment:", res.status);
+              }
+            })
+            .catch((error) => console.error("Error deleting appointment:", error));
+        };
     
 
 
@@ -86,6 +104,9 @@ function PatientAppointments() {
           <li key={appointment.id}>
             Date: {appointment.date}, Time: {appointment.time}, Description:{" "}
             {appointment.description}
+            <button onClick={() => handleDeleteAppointment(appointment.id)}>
+              Delete
+            </button>
           </li>
         ))}
       </ul>
