@@ -1,0 +1,27 @@
+.login_text {
+  text-align: center;
+
+  font-weight: bold;
+}
+
+.login_text button {
+  padding: 8px 20px;
+  background-color: #12b886;
+  border-radius: 100px;
+  margin-left: 10px;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #099268;
+  /* color: #e6fcf5; */
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+}

@@ -1,9 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 function LogInForm() {
+  const [error, setError] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     control,
@@ -12,7 +16,28 @@ function LogInForm() {
   } = useForm();
 
   function onSubmit(data) {
-    console.log("Form Submit", data);
+    setIsLoading(true);
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.username,
+        password: data.password,
+      }),
+    }).then((r) => {
+      setIsLoading(false);
+      if (r.ok) {
+        r.json().then((user) => {
+          // localStorage.setItem("loggedInUser", JSON.stringify(user));
+          // localStorage.setItem("isAuthenticated", "true");
+          navigate("/appointments", { state: { loggedInUser: user } });
+        });
+      } else {
+        r.json().then((err) => setError(err.errors));
+      }
+    });
   }
 
   return (
@@ -50,8 +75,20 @@ function LogInForm() {
           })}
         />
         <p className="error">{errors.password?.message}</p>
-        <button className="hook_form_btn">Submit</button>
+        <button className="hook_form_btn" type="submit">
+          {isLoading ? "Loading..." : "Login"}
+        </button>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/register" className="redirect_button">
+            Sign Up
+          </Link>
+        </p>
       </form>
+      <p className="error">{error}</p>
+      {/* {errors.map((err) => (
+          <Error key={err}>{err}</Error>
+        ))} */}
       <DevTool control={control} />
     </div>
   );
