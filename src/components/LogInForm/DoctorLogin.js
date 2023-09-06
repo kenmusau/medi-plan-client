@@ -1,18 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
 
 function LogInForm() {
+  const [error, setError] = useState([]);
+  const navigate = useNavigate();
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   function onSubmit(data) {
-    console.log("Form Submit", data);
+    fetch("/loginDoc", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.username,
+        password: data.password,
+      }),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          // localStorage.setItem("loggedInUser", JSON.stringify(user));
+          // localStorage.setItem("isAuthenticated", "true");
+          navigate("/doctorDash", { state: { loggedInDoc: user } });
+        });
+      } else {
+        r.json().then((err) => setError(err.errors));
+      }
+    });
   }
 
   return (
@@ -52,7 +71,7 @@ function LogInForm() {
         <p className="error">{errors.password?.message}</p>
         <button className="hook_form_btn">Submit</button>
       </form>
-      <DevTool control={control} />
+      <p className="error">{error}</p>
     </div>
   );
 }

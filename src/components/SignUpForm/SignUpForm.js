@@ -12,6 +12,7 @@ function SignUpForm({ onLogin }) {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -27,14 +28,15 @@ function SignUpForm({ onLogin }) {
         username: data.username,
         email: data.email,
         password: data.password,
-        date_of_birth: data.dob,
+        dob: data.dob,
         gender: data.gender,
       }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        r.json().then((user) => onLogin(user));
+        // r.json().then((user) => onLogin(user));
         r.json().then((user) => console.log(user));
+        reset();
       } else {
         r.json().then((err) => setError(err.errors));
       }
@@ -84,7 +86,7 @@ function SignUpForm({ onLogin }) {
           type="date"
           id="dob"
           {...register("dob", {
-            valueAsDate: true,
+            // valueAsDate: true,
             required: {
               value: true,
               message: "Your date of birth is required",
@@ -117,15 +119,12 @@ function SignUpForm({ onLogin }) {
           {isLoading ? "Loading..." : "Sign Up"}
         </button>
         <p>
-          Already have an account?{" "}
+          Already have an account?
           <Link to="/login" className="redirect_button">
             Log In
           </Link>
         </p>
-        <p>{error}</p>
-        {/* {error.map((err) => (
-          <Error key={err}>{err}</Error>
-        ))} */}
+        <p className="error">{error}</p>
       </form>
       <DevTool control={control} />
     </div>

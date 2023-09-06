@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
-function LogInForm({ onLogin }) {
+function LogInForm() {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     control,
@@ -27,8 +29,11 @@ function LogInForm({ onLogin }) {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        r.json().then((user) => onLogin(user));
-        r.json().then((user) => console.log(user));
+        r.json().then((user) => {
+          // localStorage.setItem("loggedInUser", JSON.stringify(user));
+          // localStorage.setItem("isAuthenticated", "true");
+          navigate("/appointments", { state: { loggedInUser: user } });
+        });
       } else {
         r.json().then((err) => setError(err.errors));
       }
@@ -80,7 +85,7 @@ function LogInForm({ onLogin }) {
           </Link>
         </p>
       </form>
-      <p>{error}</p>
+      <p className="error">{error}</p>
       {/* {errors.map((err) => (
           <Error key={err}>{err}</Error>
         ))} */}
