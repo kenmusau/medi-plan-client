@@ -6,7 +6,7 @@ function DoctorAppointments() {
   const {doctorId } = useParams(); 
 
   useEffect(() => {
-    fetch(`TBD`)
+    fetch("http://localhost:3000/patients")
       .then((response) => response.json())
       .then((data) => setAppointments(data))
       .catch((error) => console.error("Error fetching data:", error));
