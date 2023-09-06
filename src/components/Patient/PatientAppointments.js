@@ -7,8 +7,10 @@ function PatientAppointments() {
     time: "",
     description: "",
   });
+  const [editingAppointment, setEditingAppointment] = useState(null);
+
   useEffect(() => {
-    fetch("/api/patientAppointments")
+    fetch("API")
       .then((response) => response.json())
       .then((data) => {
         setAppointments(data);
@@ -44,74 +46,141 @@ function PatientAppointments() {
         .catch((error) => console.error("Error creating appointment:", error));
         };
 
-        const handleDeleteAppointment = (id) => {
-          fetch(`/API`, {
-            method: "DELETE",
-          })
-            .then((res) => {
-              if (res.status === 204) {
-                // Appointment successfully deleted
-                const updatedAppointments = appointments.filter(
-                  (appointment) => appointment.id !== id
-                );
-                setAppointments(updatedAppointments);
-              } else {
-                console.error("Error deleting appointment:", res.status);
-              }
-            })
-            .catch((error) => console.error("Error deleting appointment:", error));
+        const handleEditAppointment = (appointment) => {
+          setEditingAppointment(appointment);
+          setNewAppointment(appointment); 
         };
-    
 
+        const handleUpdateAppointment = () => {
+          if (editingAppointment) {
+            fetch(`/api/updateAppointment/${editingAppointment.id}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(editingAppointment),
+            })
+              .then(() => {
+                setEditingAppointment(null);
+              })
+              .catch((error) => console.error("Error updating appointment:", error));
+          }
+        };
 
-  return (
-    <div>
-      <h1>Your Appointments</h1>
-      <form onSubmit={handleCreateAppointment}>
-        <div>
-          <label>Date:</label>
-          <input
-            type="date"
-            name="date"
-            value={newAppointment.date}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Time:</label>
-          <input
-            type="time"
-            name="time"
-            value={newAppointment.time}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={newAppointment.description}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit">Create Appointment</button>
-      </form>
-      <ul>
-        {appointments.map((appointment) => (
-          <li key={appointment.id}>
-            Date: {appointment.date}, Time: {appointment.time}, Description:{" "}
-            {appointment.description}
-            <button onClick={() => handleDeleteAppointment(appointment.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+        const handleDeleteAppointment = (appointmentId) => {
+            fetch("API", {
+              method: "DELETE",
+            })
+              .then(() => {
+                console.log(`Appointment with ID ${appointmentId} deleted successfully.`);
+              })
+              .catch((error) =>
+                console.error(`Error deleting appointment with ID ${appointmentId}:`, error)
+              );
+          }
+        
+        return (
+          <div>
+            <h1>Your Appointments</h1>
+            <form onSubmit={handleCreateAppointment}>
+              <div>
+                <label>Date:</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={newAppointment.date}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label>Time:</label>
+                <input
+                  type="time"
+                  name="time"
+                  value={newAppointment.time}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <label>Description:</label>
+                <textarea
+                  name="description"
+                  value={newAppointment.description}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <button type="submit">Create Appointment</button>
+            </form>
+            <ul>
+              {appointments.map((appointment) => (
+                <li key={appointment.id}>
+                  Date: {appointment.date}, Time: {appointment.time}, Description:{" "}
+                  {appointment.description}
+                  <button onClick={() => handleEditAppointment(appointment)}>
+                  <button onClick={() => handleDeleteAppointment(appointment.id)}>Delete</button>
+                    Edit
+                  </button>
+                </li>
+              ))}
+            </ul>
+            {editingAppointment && (
+              <div>
+                <h2>Edit Appointment</h2>
+                <form>
+                  <div>
+                    <label>Date:</label>
+                    <input
+                      type="date"
+                      name="date"
+                      value={editingAppointment.date}
+                      onChange={(e) =>
+                        setEditingAppointment({
+                          ...editingAppointment,
+                          date: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label>Time:</label>
+                    <input
+                      type="time"
+                      name="time"
+                      value={editingAppointment.time}
+                      onChange={(e) =>
+                        setEditingAppointment({
+                          ...editingAppointment,
+                          time: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label>Description:</label>
+                    <textarea
+                      name="description"
+                      value={editingAppointment.description}
+                      onChange={(e) =>
+                        setEditingAppointment({
+                          ...editingAppointment,
+                          description: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+                  <button onClick={handleUpdateAppointment}>Update</button>
+                  <button onClick={() => setEditingAppointment(null)}>Cancel</button>
+                </form>
+              </div>
+            )}
+          </div>
+        );
+      }
 
 export default PatientAppointments;
