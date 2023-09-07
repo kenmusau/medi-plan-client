@@ -4,7 +4,7 @@ import { DevTool } from "@hookform/devtools";
 import "./signUpForm.css";
 import { Link } from "react-router-dom";
 
-function SignUpForm({ onLogin }) {
+function SignUpForm() {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,6 +30,7 @@ function SignUpForm({ onLogin }) {
         password: data.password,
         dob: data.dob,
         gender: data.gender,
+        full_name: data.full_name,
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -37,6 +38,7 @@ function SignUpForm({ onLogin }) {
         // r.json().then((user) => onLogin(user));
         r.json().then((user) => console.log(user));
         reset();
+        alert("Registration successful!");
       } else {
         r.json().then((err) => setError(err.errors));
       }
@@ -63,6 +65,18 @@ function SignUpForm({ onLogin }) {
           })}
         />
         <p className="error">{errors.username?.message}</p>
+        <label htmlFor="full_name">Full Names</label>
+        <input
+          type="text"
+          id="full_name"
+          {...register("full_name", {
+            required: {
+              value: true,
+              message: "Username is required",
+            },
+          })}
+        />
+        <p className="error">{errors.full_name?.message}</p>
 
         <label htmlFor="email">Email</label>
         <input
@@ -106,11 +120,11 @@ function SignUpForm({ onLogin }) {
           id="password"
           {...register("password", {
             required: { value: true, message: "password is required" },
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              message:
-                "password: Minimum eight characters, at least one letter and one number",
-            },
+            // pattern: {
+            //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+            //   message:
+            //     "password: Minimum eight characters, at least one letter and one number",
+            // },
           })}
         />
         <p className="error">{errors.password?.message}</p>

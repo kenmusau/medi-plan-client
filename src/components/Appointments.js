@@ -1,8 +1,18 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function Appointments() {
+function Appointments({ onSetLoggedUser }) {
   const { state } = useLocation();
+  const navigate = useNavigate();
+
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        onSetLoggedUser(null);
+        navigate("/login");
+      }
+    });
+  }
   // const navigate = useNavigate();
 
   // useEffect(() => {
@@ -28,6 +38,7 @@ function Appointments() {
     <div>
       <h1>Appontments</h1>
       <p>Welcome {user.username}</p>
+      <button onClick={handleLogoutClick}>Log Out</button>
     </div>
   );
 }
