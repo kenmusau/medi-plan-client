@@ -113,7 +113,7 @@ function Appointments({ onSetLoggedUser }) {
   };
 
   const handleDeleteAppointment = (appointmentId) => {
-    fetch(`${baseUrl}/${appointmentId}`, {
+    fetch(`${baseUrl}/appointments/${appointmentId}`, {
       method: "DELETE",
     })
       .then((response) => {
