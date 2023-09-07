@@ -1,0 +1,99 @@
+body {
+  width: 960px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #343a40;
+}
+
+.logo {
+  margin-bottom: 30px;
+}
+.hook_form {
+  /* margin-top: 30%; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  width: 800px;
+
+  border-radius: 12px;
+  box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
+    0 0 0 1px rgb(10 10 10 / 2%);
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.hook_form p {
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.hook_form_header {
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.sign_up_form {
+  width: 60%;
+}
+
+label {
+  color: #363636;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.4;
+}
+
+input,
+select {
+  border-radius: 6px;
+  border: 1px solid transparent;
+  border-color: #dbdbdb;
+  /* -webkit-appearance: none; */
+  max-width: 100%;
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 4px;
+  /* margin-bottom: 10px; */
+}
+select {
+  margin-bottom: 10px;
+}
+
+.hook_form_btn {
+  cursor: pointer;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 8px 16px;
+  text-decoration: none;
+  margin-bottom: 20px;
+
+  background-color: #087f5b;
+  color: white;
+}
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+}
+
+.redirect_button:link {
+  padding: 6px 20px;
+  background-color: #c3fae8;
+  border-radius: 100px;
+  margin-left: 10px;
+  color: white;
+}
+
+.redirect_button:hover {
+  background-color: #12b886;
+  color: #e6fcf5;
+}
