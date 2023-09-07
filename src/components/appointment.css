@@ -1,6 +1,7 @@
 .appointment_app {
   width: 960px;
   min-height: 100vh;
+  padding-bottom: 30px;
 }
 
 .appointment_header {
@@ -22,6 +23,10 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
+}
+
+.btn_cancel {
+  margin-bottom: 10px;
 }
 
 .btn_logout:hover {
