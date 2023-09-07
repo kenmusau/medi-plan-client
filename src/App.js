@@ -8,21 +8,6 @@ import DoctorDash from "./components/DoctorDash";
 import { useState } from "react";
 function App() {
   const [Loggeduser, setLoggedUser] = useState(null);
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   // auto-login
-  //   fetch("/mepatient").then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
-
-  // console.log(user);
-
-  // if (!user) return <Login onLogin={setUser} /> ;
-  // "proxy": "https://mediplan-api.onrender.com",
 
   return (
     <div className="App">
