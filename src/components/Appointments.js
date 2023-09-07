@@ -40,7 +40,7 @@ function Appointments({ onSetLoggedUser }) {
     const newAppointment = {
       date_time: formData.date,
       description: formData.description,
-      doctor_id: 14,
+      doctor_id: 18,
       patient_id: user.id,
     };
     console.log("Sending data:", JSON.stringify(newAppointment));
