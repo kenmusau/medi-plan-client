@@ -1,0 +1,44 @@
+.appointment_app {
+  width: 960px;
+  min-height: 100vh;
+}
+
+.appointment_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.appointment_btn {
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.btn_logout {
+  padding: 8px 20px;
+  background-color: #fa5252;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn_logout:hover {
+  background-color: #f03e3e;
+}
+
+.appointment_name_header {
+  text-align: center;
+}
+
+.appointment_list {
+  background-color: #96f2d7;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 12px;
+}
+
+.appointment_list:first-child {
+  margin-top: 10px;
+}

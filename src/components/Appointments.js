@@ -2,13 +2,13 @@ import moment from "moment";
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
- import { baseUrl } from "../utlis";
+import { baseUrl } from "../utlis";
+import "./appointment.css";
 
-
-function Appointments({ onSetLoggedUser}) {
+function Appointments({ onSetLoggedUser }) {
   //const { state } = useLocation();
   const navigate = useNavigate();
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   function handleLogoutClick() {
     fetch(`${baseUrl}/logout`, { method: "DELETE" }).then((r) => {
@@ -19,7 +19,7 @@ function Appointments({ onSetLoggedUser}) {
     });
   }
   // const navigate = useNavigate();
-console.log(user.id)
+  console.log(user.id);
   // var user = state.loggedInUser;
   const [appointments, setAppointments] = useState(user.appointments);
   const [formData, setFormData] = useState({
@@ -27,7 +27,6 @@ console.log(user.id)
     description: "",
   });
   const [editingAppointment, setEditingAppointment] = useState(null);
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,15 +38,15 @@ console.log(user.id)
   const handleCreateAppointment = (e) => {
     e.preventDefault();
     const newAppointment = {
-        date_time: formData.date,
-        description: formData.description,
-        doctor_id: 14,
-        patient_id: user.id
+      date_time: formData.date,
+      description: formData.description,
+      doctor_id: 14,
+      patient_id: user.id,
     };
     console.log("Sending data:", JSON.stringify(newAppointment));
     fetch(`${baseUrl}/appointments`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newAppointment),
     })
       .then((response) => response.json())
@@ -56,7 +55,6 @@ console.log(user.id)
         setFormData({
           date: "",
           description: "",
-
         });
       })
       .catch((error) => console.error("Error creating appointment:", error));
@@ -105,7 +103,7 @@ console.log(user.id)
             description: "",
           });
           setEditingAppointment(null);
-          user.Appointments = updatedAppointments
+          user.Appointments = updatedAppointments;
           navigate("/appointments", { state: { loggedInUser: user } });
         })
         .catch((error) => {
@@ -133,23 +131,48 @@ console.log(user.id)
       });
   };
 
- return (
-    <div>
-      <h1>Appointments</h1>
-      <p>Welcome {user.username}</p>
+  return (
+    <div className="appointment_app">
+      <h1 className="appointment_name_header">Welcome {user.username}</h1>
+      <div className="appointment_header">
+        <h1>Appointments</h1>
+        <button
+          className="appointment_btn btn_logout"
+          onClick={handleLogoutClick}
+        >
+          Log Out
+        </button>
+      </div>
       <p>Name: {user.full_name}</p>
       <p>Date of Birth: {moment(user.dob).format("MMMM Do YYYY")}</p>
       <h2>Appointments</h2>
       {appointments.map((appointment) => (
-        <div key={appointment.id}>
-          <p>Date: {moment(appointment.date_time).format("MMMM Do YYYY, h:mm:ss a")}</p>
+        <div key={appointment.id} className="appointment_list">
+          <p>
+            Date:{" "}
+            {moment(appointment.date_time).format("MMMM Do YYYY, h:mm:ss a")}
+          </p>
           <p>Description: {appointment.description}</p>
-          <button onClick={() => handleEditAppointment(appointment.id)}>Edit</button>
-          <button onClick={() => handleDeleteAppointment(appointment.id)}>Delete</button>
+          <button
+            className="appointment_btn btn_edit"
+            onClick={() => handleEditAppointment(appointment.id)}
+          >
+            Edit
+          </button>
+          <button
+            className="appointment_btn btn_logout"
+            onClick={() => handleDeleteAppointment(appointment.id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
-       <h2>{editingAppointment ? "Edit Appointment" : "Create Appointment"}</h2>
-      <form onSubmit={editingAppointment ? handleUpdateAppointment : handleCreateAppointment}>
+      <h2>{editingAppointment ? "Edit Appointment" : "Create Appointment"}</h2>
+      <form
+        onSubmit={
+          editingAppointment ? handleUpdateAppointment : handleCreateAppointment
+        }
+      >
         <div>
           <label>Date:</label>
           <input
@@ -170,16 +193,20 @@ console.log(user.id)
             required
           />
         </div>
-        <button type="submit">
+        <button className="appointment_btn btn_update" type="submit">
           {editingAppointment ? "Update" : "Create"}
         </button>
         {editingAppointment && (
-          <button onClick={() => setEditingAppointment(null)}>Cancel</button>
+          <button
+            className="appointment_btn btn_cancel"
+            onClick={() => setEditingAppointment(null)}
+          >
+            Cancel
+          </button>
         )}
       </form>
-      <button onClick={handleLogoutClick}>Log Out</button>
     </div>
   );
-};
+}
 
 export default Appointments;
