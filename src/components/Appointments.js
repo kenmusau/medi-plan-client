@@ -82,7 +82,7 @@ function Appointments({ onSetLoggedUser }) {
         description: formData.description,
       };
 
-      fetch(`${baseUrl}/${editingAppointment.id}`, {
+      fetch(`${baseUrl}/appointments/${editingAppointment.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
