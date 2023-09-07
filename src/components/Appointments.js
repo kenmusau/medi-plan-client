@@ -2,9 +2,19 @@ import React, {useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment";
 
-function Appointments() {
+function Appointments({ onSetLoggedUser}) {
   const { state } = useLocation();
   const navigate = useNavigate();
+
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        onSetLoggedUser(null);
+        navigate("/login");
+      }
+    });
+  }
+  // const navigate = useNavigate();
 
    var user = state.loggedInUser;
   const [appointments, setAppointments] = useState(user.appointments);
@@ -163,6 +173,7 @@ function Appointments() {
           <button onClick={() => setEditingAppointment(null)}>Cancel</button>
         )}
       </form>
+      <button onClick={handleLogoutClick}>Log Out</button>
     </div>
   );
 };

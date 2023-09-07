@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { DevTool } from "@hookform/devtools";
+//import { baseUrl } from "../../utlis";
 
-function LogInForm() {
+function LogInForm({ Loggeduser, onSetLoggedUser }) {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    
+    fetch("/mepatient").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => onSetLoggedUser(user));
+      }
+    });
+  }, [onSetLoggedUser]);
+
+  console.log(Loggeduser);
 
   function onSubmit(data) {
     setIsLoading(true);
@@ -37,6 +47,11 @@ function LogInForm() {
       }
     });
   }
+
+  console.log(Loggeduser);
+
+  if (Loggeduser)
+    return navigate("/appointments", { state: { loggedInUser: Loggeduser } });
 
   return (
     <div className="hook_form">
@@ -82,7 +97,6 @@ function LogInForm() {
       {/* {errors.map((err) => (
           <Error key={err}>{err}</Error>
         ))} */}
-      <DevTool control={control} />
     </div>
   );
 }

@@ -1,0 +1,1 @@
+export const baseUrl = 'https://mediplan-api.onrender.com'

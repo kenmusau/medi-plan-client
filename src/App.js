@@ -5,30 +5,56 @@ import LogInForm from "./components/LogInForm/LogInForm";
 import DoctorLogin from "./components/LogInForm/DoctorLogin";
 import Appointments from "./components/Appointments";
 import DoctorDash from "./components/DoctorDash";
-// import { useState, useEffect } from "react";
+import { useState } from "react";
 function App() {
+  const [Loggeduser, setLoggedUser] = useState(null);
   // const [user, setUser] = useState(null);
 
   // useEffect(() => {
   //   // auto-login
-  //   fetch("/me").then((r) => {
+  //   fetch("/mepatient").then((r) => {
   //     if (r.ok) {
   //       r.json().then((user) => setUser(user));
   //     }
   //   });
   // }, []);
 
+  // console.log(user);
+
   // if (!user) return <Login onLogin={setUser} /> ;
+  // "proxy": "https://mediplan-api.onrender.com",
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<SignUpForm />} />
-        <Route path="/login" element={<LogInForm />} />
-        <Route path="/doctorLogin" element={<DoctorLogin />} />
-        <Route path="/appointments" element={<Appointments />} />
-        <Route path="/doctorDash" element={<DoctorDash />} />
+        <Route
+          path="/login"
+          element={
+            <LogInForm
+              Loggeduser={Loggeduser}
+              onSetLoggedUser={setLoggedUser}
+            />
+          }
+        />
+        <Route
+          path="/doctorLogin"
+          element={
+            <DoctorLogin
+              Loggeduser={Loggeduser}
+              onSetLoggedUser={setLoggedUser}
+            />
+          }
+        />
+        <Route
+          path="/appointments"
+          element={<Appointments onSetLoggedUser={setLoggedUser} />}
+        />
+        <Route
+          path="/doctorDash"
+          element={<DoctorDash onSetLoggedUser={setLoggedUser} />}
+        />
       </Routes>
     </div>
   );
