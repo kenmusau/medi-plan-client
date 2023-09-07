@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext }  from 'react'
+import { baseUrl } from '../utlis';
 
 export const UserContext = createContext()
 
@@ -6,7 +7,7 @@ const UserProvider = ({children}) => {
     const [user, setUser] = useState(null);
     useEffect(() => {
     
-        fetch("/mepatient").then((r) => {
+        fetch(`${baseUrl}/mepatient`).then((r) => {
           if (r.ok) {
             r.json().then((user) => setUser(user));
           }
