@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-function LogInForm() {
+function LogInForm({ Loggeduser, onSetLoggedUser }) {
   const [error, setError] = useState([]);
   const navigate = useNavigate();
   const {
@@ -10,6 +10,15 @@ function LogInForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    // auto-login
+    fetch("/mepatient").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => onSetLoggedUser(user));
+      }
+    });
+  }, [onSetLoggedUser]);
 
   function onSubmit(data) {
     fetch("/loginDoc", {
@@ -29,10 +38,13 @@ function LogInForm() {
           navigate("/doctorDash", { state: { loggedInDoc: user } });
         });
       } else {
-        r.json().then((err) => setError(err.errors));
+        r.json().then((err) => setError(err.error));
       }
     });
   }
+
+  if (Loggeduser)
+    return navigate("/doctorDash", { state: { loggedInDoc: Loggeduser } });
 
   return (
     <div className="hook_form">
@@ -62,7 +74,7 @@ function LogInForm() {
           {...register("password", {
             required: { value: true, message: "password is required" },
             pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+              // value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
               message:
                 "password: Minimum eight characters, at least one letter and one number",
             },
