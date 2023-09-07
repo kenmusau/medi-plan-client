@@ -6,19 +6,21 @@ import { UserContext } from "../contexts/UserContext";
 
 
 function Appointments({ onSetLoggedUser}) {
+  //const { state } = useLocation();
   const navigate = useNavigate();
   const {user} = useContext(UserContext)
 
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
+    fetch(`${baseUrl}/logout`, { method: "DELETE" }).then((r) => {
       if (r.ok) {
         onSetLoggedUser(null);
         navigate("/login");
       }
     });
   }
- 
+  // const navigate = useNavigate();
 console.log(user.id)
+  // var user = state.loggedInUser;
   const [appointments, setAppointments] = useState(user.appointments);
   const [formData, setFormData] = useState({
     date: "",
