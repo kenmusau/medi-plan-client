@@ -61,11 +61,11 @@ function LogInForm() {
           id="password"
           {...register("password", {
             required: { value: true, message: "password is required" },
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              message:
-                "password: Minimum eight characters, at least one letter and one number",
-            },
+            // pattern: {
+            //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+            //   message:
+            //     "password: Minimum eight characters, at least one letter and one number",
+            // },
           })}
         />
         <p className="error">{errors.password?.message}</p>

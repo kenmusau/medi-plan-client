@@ -30,8 +30,6 @@ function LogInForm() {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => {
-          // localStorage.setItem("loggedInUser", JSON.stringify(user));
-          // localStorage.setItem("isAuthenticated", "true");
           navigate("/appointments", { state: { loggedInUser: user } });
         });
       } else {
@@ -67,11 +65,6 @@ function LogInForm() {
           id="password"
           {...register("password", {
             required: { value: true, message: "password is required" },
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              message:
-                "password: Minimum eight characters, at least one letter and one number",
-            },
           })}
         />
         <p className="error">{errors.password?.message}</p>
