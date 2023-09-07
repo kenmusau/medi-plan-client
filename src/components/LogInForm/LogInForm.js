@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-//import { baseUrl } from "../../utlis";
+import { UserContext } from "../../contexts/UserContext";
+import { baseUrl } from "../../utlis";
 
 function LogInForm({ Loggeduser, onSetLoggedUser }) {
   const [error, setError] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const {setUser} = useContext(UserContext)
   const {
     register,
     handleSubmit,
@@ -16,7 +17,7 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
 
   useEffect(() => {
     
-    fetch("/mepatient").then((r) => {
+    fetch(`${baseUrl}/mepatient`).then((r) => {
       if (r.ok) {
         r.json().then((user) => onSetLoggedUser(user));
       }
@@ -27,7 +28,7 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
 
   function onSubmit(data) {
     setIsLoading(true);
-    fetch("/login", {
+    fetch(`${baseUrl}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,6 +41,7 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => {
+          setUser(user);
           navigate("/appointments", { state: { loggedInUser: user } });
         });
       } else {

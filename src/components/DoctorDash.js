@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-
+import { baseUrl } from "../utlis";
 
 
 function DoctorDash({ onSetLoggedUser }) {
@@ -10,7 +10,7 @@ function DoctorDash({ onSetLoggedUser }) {
   const [patients, setPatients] = useState([]);
 
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
+    fetch(`${baseUrl}/logout`, { method: "DELETE" }).then((r) => {
       if (r.ok) {
         onSetLoggedUser(null);
         navigate("/doctorLogin");
@@ -22,7 +22,7 @@ function DoctorDash({ onSetLoggedUser }) {
   console.log(doc);
 
   useEffect(() => {
-    fetch("http://localhost:3000/patients")
+    fetch(`${baseUrl}/patients`)
       .then((response) => response.json())
       .then((data) => setPatients(data))
       .catch((error) => console.error("Error fetching data:", error));

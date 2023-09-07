@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import "./signUpForm.css";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../../utlis";
 
 function SignUpForm() {
   const [error, setError] = useState([]);
@@ -19,7 +20,7 @@ function SignUpForm() {
   function onSubmit(data) {
     setError([]);
     setIsLoading(true);
-    fetch("/signup", {
+    fetch(`${baseUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +36,7 @@ function SignUpForm() {
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        // r.json().then((user) => onLogin(user));
+        
         r.json().then((user) => console.log(user));
         reset();
         alert("Registration successful!");

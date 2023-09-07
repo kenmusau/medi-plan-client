@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { baseUrl } from "../../utlis";
 
 function LogInForm({ Loggeduser, onSetLoggedUser }) {
   const [error, setError] = useState([]);
@@ -13,7 +14,7 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
 
   useEffect(() => {
     // auto-login
-    fetch("/mepatient").then((r) => {
+    fetch(`${baseUrl}/mepatient`).then((r) => {
       if (r.ok) {
         r.json().then((user) => onSetLoggedUser(user));
       }
@@ -21,7 +22,7 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
   }, [onSetLoggedUser]);
 
   function onSubmit(data) {
-    fetch("/loginDoc", {
+    fetch(`${baseUrl}/loginDoc`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,8 +34,6 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          // localStorage.setItem("loggedInUser", JSON.stringify(user));
-          // localStorage.setItem("isAuthenticated", "true");
           navigate("/doctorDash", { state: { loggedInDoc: user } });
         });
       } else {
@@ -73,11 +72,6 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
           id="password"
           {...register("password", {
             required: { value: true, message: "password is required" },
-            // pattern: {
-            //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-            //   message:
-            //     "password: Minimum eight characters, at least one letter and one number",
-            // },
           })}
         />
         <p className="error">{errors.password?.message}</p>

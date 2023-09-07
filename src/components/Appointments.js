@@ -1,10 +1,13 @@
-import React, {useState} from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment";
-import { baseUrl} from "../utlis"
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
+ import { baseUrl } from "../utlis";
+
+
 function Appointments({ onSetLoggedUser}) {
-  const { state } = useLocation();
   const navigate = useNavigate();
+  const {user} = useContext(UserContext)
 
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -14,9 +17,8 @@ function Appointments({ onSetLoggedUser}) {
       }
     });
   }
-  // const navigate = useNavigate();
-
-   var user = state.loggedInUser;
+ 
+console.log(user.id)
   const [appointments, setAppointments] = useState(user.appointments);
   const [formData, setFormData] = useState({
     date: "",
@@ -37,7 +39,7 @@ function Appointments({ onSetLoggedUser}) {
     const newAppointment = {
         date_time: formData.date,
         description: formData.description,
-        doctor_id: 1,
+        doctor_id: 14,
         patient_id: user.id
     };
     console.log("Sending data:", JSON.stringify(newAppointment));
@@ -80,7 +82,7 @@ function Appointments({ onSetLoggedUser}) {
         description: formData.description,
       };
 
-      fetch(`http://localhost:3000/appointments/${editingAppointment.id}`, {
+      fetch(`${baseUrl}/${editingAppointment.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +113,7 @@ function Appointments({ onSetLoggedUser}) {
   };
 
   const handleDeleteAppointment = (appointmentId) => {
-    fetch(`http://localhost:3000/appointments/${appointmentId}`, {
+    fetch(`${baseUrl}/${appointmentId}`, {
       method: "DELETE",
     })
       .then((response) => {
