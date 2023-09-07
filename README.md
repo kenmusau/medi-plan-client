@@ -4,6 +4,18 @@
 
 The Healthcare Appointment Management System project aims to create an efficient and user-friendly platform for managing appointments between patients and doctors. This web application will be developed using Ruby on Rails for the backend and React for the frontend, providing a seamless experience for both patients and healthcare professionals.
 
+### Live Link:
+
+https://medi-plan-client.vercel.app/
+
+### FrontEnd Repo
+
+https://github.com/Ken-Musau/medi-plan-client
+
+### Backend Repo
+
+https://github.com/LGMAKENA/mediplan
+
 ## Problem and Solution
 
 The current healthcare system faces challenges related to appointment management. Patients often struggle to schedule, track, and manage their appointments, while doctors find it challenging to organize their patient schedules effectively. Moreover, the lack of a digital platform hinders proper record-keeping and communication between patients and doctors.
