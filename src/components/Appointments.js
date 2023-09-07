@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment";
-
+import { baseUrl} from "../utlis"
 function Appointments({ onSetLoggedUser}) {
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Appointments({ onSetLoggedUser}) {
         patient_id: user.id
     };
     console.log("Sending data:", JSON.stringify(newAppointment));
-    fetch("http://localhost:3000/appointments", {
+    fetch(`${baseUrl}/appointments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newAppointment),

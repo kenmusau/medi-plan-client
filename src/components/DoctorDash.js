@@ -7,6 +7,7 @@ import moment from "moment";
 function DoctorDash({ onSetLoggedUser }) {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [patients, setPatients] = useState([]);
 
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
@@ -17,7 +18,7 @@ function DoctorDash({ onSetLoggedUser }) {
     });
   }
   const doc = state.loggedInDoc;
-  const [patients, setPatients] = useState([]);
+  
   console.log(doc);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function DoctorDash({ onSetLoggedUser }) {
       <p>welcome {doc.full_name}</p>
       <h2>Doctor's Appointments</h2>
       <ul>
-        {patients.map(patient => (
+        {patients.length > 0 && patients.map(patient => (
           <li key={patient.id}>
             <h3>Patient: {patient.full_name}</h3>
             <p>Date of Birth: {moment(patient.dob).format('MMMM Do YYYY')}</p>

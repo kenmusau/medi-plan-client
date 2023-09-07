@@ -73,19 +73,11 @@ function LogInForm({ Loggeduser, onSetLoggedUser }) {
           id="password"
           {...register("password", {
             required: { value: true, message: "password is required" },
-<<<<<<< HEAD
             // pattern: {
             //   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
             //   message:
             //     "password: Minimum eight characters, at least one letter and one number",
             // },
-=======
-            pattern: {
-              // value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              message:
-                "password: Minimum eight characters, at least one letter and one number",
-            },
->>>>>>> d08ad5bbcf51cba0e8d6391031ef61a2a02dd666
           })}
         />
         <p className="error">{errors.password?.message}</p>
